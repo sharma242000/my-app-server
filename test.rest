@@ -1,7 +1,2 @@
-POST http://localhost:8000/api/auth/register HTTP/1.1
-Content-Type: application/json
-
-{
-    "username": "john_doe",
-    "password": "password123"
-}
+GET http://localhost:8000/user/users HTTP/1.1
+Authorization: 1234567890

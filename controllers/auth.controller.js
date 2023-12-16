@@ -14,7 +14,7 @@ const userRegistration = async (req, res) => {
     const user = new User({ username, password });
     await user.save();
 
-    res.send('User registered');
+    res.status(200).send('User registered');
 }
 
 // Login
@@ -28,7 +28,7 @@ const userLogin = async (req, res) => {
     if (!validPassword) return res.status(400).send('Invalid credentials');
 
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
-    res.header('auth-token', token).send(token);
+    res.header('Authorization', token).status(200).send(token);
 }
 
 module.exports = {userRegistration, userLogin};

@@ -1,6 +1,6 @@
-const authController = require('../controller/auth.controller');
+const authController = require('../controllers/auth.controller');
 
 module.exports = (app) => {
-    app.post('/user/auth/register', authController.userRegistration);
-    app.post('/user/auth/login', authController.userLogin);
+    app.post('/auth/register', authController.userRegistration);
+    app.post('/auth/login', authController.userLogin);
 }

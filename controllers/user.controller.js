@@ -10,9 +10,8 @@ const listUsers = async (req, res) => {
 
     userInfos = filteredUsers.map(user => {
         return {
-            id: user._id.toString() + currId.toString(),
-            name: user.username,
-            sockets: []
+            id: user._id.toString() + '_' + currId.toString(),
+            name: user.username
         }
     });
     res.status(200).send(userInfos);

@@ -13,9 +13,6 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 
 const app = express();
 
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
-
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Credentials', true)
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-type, Accept, Authorization');
@@ -33,6 +30,7 @@ initRoutes(app);
 const PORT = 8000;
 app.listen(PORT, () => logger.info(`Server running on port ${PORT}`));
 
+var io = require('socket.io')(8080);
 io.on('connection', (socket) => { // socket object may be used to send specific messages to the new connected client
     console.log('new client connected');
     socket.emit('connection', null);

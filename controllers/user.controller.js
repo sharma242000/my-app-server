@@ -17,4 +17,10 @@ const listUsers = async (req, res) => {
     res.status(200).send(userInfos);
 }
 
-module.exports = {listUsers};
+// Get Username
+const getUsername = async (req, res) => {
+    currUser = User.findById(req.user._id);
+    res.status(200).send({username: currUser.username});
+}
+
+module.exports = {listUsers, getUsername};

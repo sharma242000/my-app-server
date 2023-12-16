@@ -3,14 +3,11 @@ var bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 const logger = require('./utils/logger');
 const initRoutes = require('./initRoutes');
-const postRoutes = require('./controller/posts');
-const authRoutes = require('./controller/auth.controller');
-const req = require('express/lib/request');
 require('dotenv').config();
 
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://sharmamohit242000:bteVHLgSvIylnqbN@cluster0.aehyewe.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => logger.info('MongoDB connected'))
     .catch(err => logger.error(err));
 

@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const { use } = require('express/lib/application');
 
 const verifyToken = (req, res, next) => {
     // next();
@@ -16,9 +17,10 @@ const verifyToken = (req, res, next) => {
 }
 
 const verifyAdmin = (req, res, next) => {
-    user = User.findById(req.user._id);
-    if (!user || user.username != 'ADMIN') return res.status(401).send('Access denied');
-    next();
+    User.findById(req.user._id).then(user => {
+        if (user.username != 'ADMIN') return res.status(401).send('Access denied');
+        next();
+    }).catch(err => {return res.status(401).send('Access denied')});
 }
 
 module.exports = {verifyToken, verifyAdmin}

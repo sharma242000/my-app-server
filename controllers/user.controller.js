@@ -2,11 +2,17 @@ const User = require('../models/User');
 
 // List all users
 const listUsers = async (req, res) => {
+    currId = req.user._id;
+    currUser = User.findById(currId);
+
     const users = await User.find();
-    userInfos = users.map(user => {
+    const filteredUsers = users.filter(user => user.username != currUser.username);
+
+    userInfos = filteredUsers.map(user => {
         return {
-            _id: user._id,
-            username: user.username
+            id: user._id.toString() + currId.toString(),
+            name: user.username,
+            sockets: []
         }
     });
     res.status(200).send(userInfos);
